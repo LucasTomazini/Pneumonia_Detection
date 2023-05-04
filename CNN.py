@@ -52,13 +52,14 @@ Pathv = r'.\\chest_xray\\val\\'
 
 #print(os.listdir(Path))
 '''
-    transforms.Normalize() é usado para normalizar os canais de cores da imagem. 
-    Na chamada transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)), 
-    os primeiros parâmetros (0.5, 0.5, 0.5) são as médias dos canais vermelho, verde e azul (RGB) respectivamente 
-    e os segundos parâmetros (0.5, 0.5, 0.5) são os desvios padrão dos canais RGB, também respectivamente.
+    transforms.Normalize() is used to normalize the color channels of an image. 
+    In the call transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)), 
+    the first parameters (0.5, 0.5, 0.5) are the means of the red, green, and blue (RGB) channels respectively, 
+    and the second parameters (0.5, 0.5, 0.5) are the standard deviations of the RGB channels, also respectively.
 
-    O que essa chamada faz é normalizar cada canal da imagem, subtraindo a média do canal e dividindo pelo desvio padrão. 
-    O resultado disso é que a média de cada canal da imagem se torna zero e o desvio padrão se torna 1
+    What this call does is normalize each channel of the image by subtracting the channel mean and dividing by the standard deviation. 
+    The result of this is that the mean of each channel of the image becomes zero and the standard deviation becomes 1.
+
 '''
 
 class CustomDataset(data.Dataset):
