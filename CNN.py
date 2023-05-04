@@ -25,11 +25,11 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print('device=',device)
 
 '''
-Basic Structure
-# Criar instância do dataset
+##### Basic Structure #####
+# Create a Pytorch Dataset
 dataset = CustomDataset(data_dir)
 
-# Carregar dados em um modelo
+# Create and Train a model
 dataloader = DataLoader(dataset, batch_size=32, shuffle=True)
 model = MyModel()
 criterion = nn.CrossEntropyLoss()
@@ -42,7 +42,6 @@ for epoch in range(num_epochs):
         loss = criterion(outputs, labels)
         loss.backward()
         optimizer.step()
-
 
 '''
 
@@ -124,7 +123,7 @@ img.show()
 dataloader = DataLoader(dataset,batch_size=32, shuffle=True)
 
 
-# TESTE LENET
+##### LENET #####
 class LeNet(Module):
     def __init__(self, numChannels, classes):
         '''
@@ -178,7 +177,7 @@ class LeNet(Module):
     
 
 # define training hyperparaeters
-'''
+
 LR = 1e-3
 batch_size = 32
 epochs = 1
@@ -205,8 +204,6 @@ History = {
 }
 
 print("<< INFO >>  trainning the network..")
-
-
 
 for epoch in range(epochs):
     print('epoch=', epoch)
@@ -267,8 +264,10 @@ plt.plot(History['val_accuracy'], label='Val_Accuracy')
 plt.legend()
 plt.title('Accuracy Evolution')
 plt.show()
-'''
 
+##### FINISH LENET TRAINNING #####
+
+##### TRANSFER LEARNING ON RESNET AND VGG VARIATIONS #####
 model_names = ['resnet18', 'resnet34', 'resnet50', 'resnet101', 'resnet152',
                'vgg16', 'vgg13', 'vgg16', 'vgg19']
 
@@ -363,49 +362,4 @@ for model_name in model_names:
             print("Epoch: {}  Train Loss: {:.4f}  Train Acc: {:.4f}  Val Loss: {:.4f}  Val Acc: {:.4f}".format(
         epoch+1, train_loss, train_acc, val_loss, val_acc))
 
-
-
-"""
-
-
-
-
-## transfer learning ##
-
-transform1 = transforms.Compose([
-    transforms.Resize((224, 224)),
-    transforms.ToTensor(),
-    transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)) 
-])
-
-dataset = CustomDataset(Path, transforms=transform1)
-dataloader = DataLoader(dataset,batch_size=32, shuffle=True)
-
-alexnet = torchvision.models.alexnet(pretrained=True)
-
-
-
-num_classes = 2
-alexnet.fc = nn.Linear(4096, num_classes) # converte alexnet para nosso caso
-
-criterion = nn.CrossEntropyLoss()
-optimizer = torch.optim.SGD(alexnet.fc.parameters(), lr=1e-3, momentum=0.9) # momentum - improve performace of SGD
-
-num_epochs = 10
-for epoch in range(num_epochs):
-    running_loss = 0
-    for i, data in enumerate(dataloader):
-        x, y = data
-        optimizer.zero_grad()
-        outputs = alexnet(x)
-        loss = criterion(outputs, y)
-        loss.backward()
-        optimizer.step()
-        running_loss+=loss.item()
-        if i % 10 == 9:
-            print('[%d, %5d] loss: %.3f' %
-                  (epoch + 1, i + 1, running_loss / 10))
-            running_loss = 0.0
-
-
-"""
+# FINISH
