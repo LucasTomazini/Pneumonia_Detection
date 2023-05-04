@@ -64,7 +64,7 @@ Pathv = r'.\\chest_xray\\val\\'
 
 class CustomDataset(data.Dataset):
     '''
-    Está função converte as imagens e transforma ela em um dataset.
+    This function transform a set of images into a pytorch dataset.
     '''
 
     def __init__(self, path, transforms=None):
@@ -113,8 +113,6 @@ transform = transforms.Compose([
 dataset = CustomDataset(Path, transforms=transform)
 
 '''
-CASO NECESSÁRIO, VERIFICA UMA IMAGEM ALEATÓRIA. JÁ ESTÁ EM 32X32
-
 TRANSF = transforms.ToPILImage()
 idx = np.random.randint(0, len(dataset))
 img = TRANSF(dataset[idx][0])
